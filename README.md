@@ -61,7 +61,7 @@ Younesse Kaddar
 
 ### Dans la fonction `compile_code` :
 
-3.  Les codes dont le traitement a été modifié sont :
+3.  Les codes dont le traitement a été modifié par rapport à la première phase du projet (où les exceptions n'étaient pas traitées)  sont :
 
   - `CRETURN(loc_expr_option)` :
 
