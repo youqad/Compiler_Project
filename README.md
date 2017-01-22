@@ -1,14 +1,9 @@
 ---
-commandline:
-    latex-engine: "`lualatex`"
-    table-of-contents: true
 title: "Projet de Programmation : Compilateur C--"
 author:
 - 'Younesse Kaddar'
 date: 2016-01-08
-documentclass: article
 tags:
-    - TD12
     - Projet
     - compilateur
     - assembleur
@@ -19,7 +14,6 @@ tags:
     - L3
     - Thiré
 abstract: 'Projet de Programmation : compilateur C--, avec support des exceptions.'
-permalink: /Programmation/Projet-Compilateur
 ---
 
 
