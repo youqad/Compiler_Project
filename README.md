@@ -176,12 +176,15 @@ ____
 
 Avantages de cette méthode :
 
-:  - L'usage de `exception_not_caught` et de `%rcx` permet de savoir vers quelle clause `catch` se brancher en *runtime*.
+:  
+  - L'usage de `exception_not_caught` et de `%rcx` permet de savoir vers quelle clause `catch` se brancher en *runtime*.
+  
   - Si les conventions d'utilisation des registres callee-saved/caller-saved sont respectées : le nom de l'exception lancée (stocké dans `%rcx`) et sa valeur (stockée dans `%rax`) ne peuvent pas être perdus, de même que le label de "point de retour" (stocké dans `%rbx`) utilisé à la fin de l'exécution d'un "finally" sans paquets.
   - L'astuce de l'adresse de retour du "finally" permet de respecter "naturellement" la sémantique, dans la mesure où si un "finally" renvoie un paquet, il l'emporte sur le paquet courant, sinon : celui-ci est transmis.
 
 
 Inconvénients :
 
-:  - En cas de fonctions $f_1, ⋯, f_n$ imbriquées ($f_1$ appelle $f_2$ qui appelle ... qui appelle $f_n$) : si $f_n$ renvoie un paquet d'exceptions qui ne peut être rattrapé que par $f_1$, le paquet entraînera un dépilement de toutes les fonctions imbriquées successivement (il sera non rattrapé dans $f_{n-1}$, puis non rattrapé dans $f_{n-2}$, etc ... jusqu'à finalement être rattrapé par $f_1$), ce qui est très lourd. Je pense qu'avec une implémentation différemment pensée, il est possible de rattraper directement le paquet dans $f_n$.
+:  
+  - En cas de fonctions $f_1, ⋯, f_n$ imbriquées ($f_1$ appelle $f_2$ qui appelle ... qui appelle $f_n$) : si $f_n$ renvoie un paquet d'exceptions qui ne peut être rattrapé que par $f_1$, le paquet entraînera un dépilement de toutes les fonctions imbriquées successivement (il sera non rattrapé dans $f_{n-1}$, puis non rattrapé dans $f_{n-2}$, etc ... jusqu'à finalement être rattrapé par $f_1$), ce qui est très lourd. Je pense qu'avec une implémentation différemment pensée, il est possible de rattraper directement le paquet dans $f_n$.
   - L'emploi d'une variable globale, de nouveaux "rôles" attribués aux registres `%rcx` et `%rbx`, et d'un nouvel environnement d'exceptions ajoute une touche d'hétérogénéité peu commode au code
